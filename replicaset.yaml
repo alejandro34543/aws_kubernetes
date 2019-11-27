@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: frontend
+  labels:
+    app: guestbook
+    tier: frontend
+spec:
+  # modify replicas according to your case
+  replicas: 3
+  selector:
+    matchLabels:
+      tier: frontend
+      role: myrole
+  template:
+    metadata:
+      labels:
+        tier: frontend
+        role: myrole
+    spec:
+      containers:
+      - name: moncontainer
+        image: 435606335423.dkr.ecr.eu-west-1.amazonaws.com/alejandro-apache:1.0.1
+        ports:
+        - name: web
+          containerPort: 80
+          protocol: TCP
